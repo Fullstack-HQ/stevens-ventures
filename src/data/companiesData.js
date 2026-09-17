@@ -1,8 +1,8 @@
 // data/companiesData.js
 export const categories = [
   { label: 'All Companies', filterClass: 'cat-all' },
-  { label: 'Technology & Marketing', filterClass: 'cat-tech', dataFilter: 'card-tech' },
   { label: 'Automotive Retail', filterClass: 'cat-auto', dataFilter: 'card-auto' },
+  { label: 'Technology & Marketing', filterClass: 'cat-tech', dataFilter: 'card-tech' },
   { label: 'Investors', filterClass: 'cat-inv', dataFilter: 'card-inv' },
   { label: 'Rental & Short Term Accommodation', filterClass: 'cat-rent', dataFilter: 'card-rent,card-sta' },
   { label: 'Film', filterClass: 'cat-film', dataFilter: 'card-film' },
