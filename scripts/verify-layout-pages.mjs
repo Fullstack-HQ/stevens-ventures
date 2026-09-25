@@ -42,10 +42,24 @@ for (const route of routes) {
 }
 
 const header = readFileSync(resolve(root, "partials/header.html"), "utf8");
-const automotivePositions = [...header.matchAll(/Automotive Retail/g)].map((match) => match.index);
-const technologyPositions = [...header.matchAll(/Technology&amp;Marketing/g)].map((match) => match.index);
-assert(automotivePositions.length === 2, "Expected Automotive Retail in desktop and mobile menus");
-assert(technologyPositions.length === 2, "Expected Technology & Marketing in desktop and mobile menus");
-assert(automotivePositions.every((position, index) => position < technologyPositions[index]), "Automotive Retail must precede Technology & Marketing in both menus");
+const expectedSectorLinks = [
+  ["/sectors/automotive-retail/", "Automotive Retail"],
+  ["/sectors/technology-marketing/", "Technology&amp;Marketing"],
+  ["/sectors/investors/", "Investors"],
+  ["/sectors/rental-short-term-accommodation/", "Rental &amp; Short Term Accommodation"],
+  ["/sectors/film/", "Film"],
+];
+const sectorParents = [...header.matchAll(/<a href="\/#companies-cards">Sectors <img/g)];
+assert(sectorParents.length === 2, "Expected linked Sectors parent in desktop and mobile menus");
 
-console.log(`Verified ${routes.length} source-backed layout pages and both menu variants.`);
+const menuBodies = [...header.matchAll(/<ul class="child-list">([\s\S]*?)<\/ul>/g)].map((match) => match[1]);
+assert(menuBodies.length === 2, "Expected desktop and mobile sector menus");
+for (const [index, menuBody] of menuBodies.entries()) {
+  const links = [...menuBody.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)].map((match) => [match[1], match[2]]);
+  assert(
+    JSON.stringify(links) === JSON.stringify(expectedSectorLinks),
+    `${index === 0 ? "Desktop" : "Mobile"} Sectors menu must contain the five live links with Automotive Retail first`,
+  );
+}
+
+console.log(`Verified ${routes.length} source-backed layout pages and both linked Sectors menu variants.`);
