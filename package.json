@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "verify:seo": "node scripts/verify-resource-seo.mjs",
-    "test": "npm run build && npm run verify:seo"
+    "verify:layout-pages": "node scripts/verify-layout-pages.mjs",
+    "test": "npm run build && npm run verify:seo && npm run verify:layout-pages"
   },
   "devDependencies": {
     "vite": "^8.1.1"
