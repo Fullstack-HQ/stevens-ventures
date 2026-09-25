@@ -62,4 +62,44 @@ for (const [index, menuBody] of menuBodies.entries()) {
   );
 }
 
-console.log(`Verified ${routes.length} source-backed layout pages and both linked Sectors menu variants.`);
+const footer = readFileSync(resolve(root, "partials/footer.html"), "utf8");
+const footerSectorBody = footer.match(/<p class="footer-title">Sectors<\/p>\s*<ul class="footer-list">([\s\S]*?)<\/ul>/)?.[1];
+assert(footerSectorBody, "Footer is missing the live Sectors link group");
+const expectedFooterLinks = [
+  ["/sectors/technology-marketing/", "Technology&amp;Marketing"],
+  ["/sectors/automotive-retail/", "Automotive Retail"],
+  ["/sectors/investors/", "Investors"],
+  ["/sectors/rental-short-term-accommodation/", "Rental &amp; Short Term Accommodation"],
+  ["/sectors/film/", "Film"],
+];
+const footerSectorLinks = [...footerSectorBody.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)].map((match) => [match[1], match[2]]);
+assert(
+  JSON.stringify(footerSectorLinks) === JSON.stringify(expectedFooterLinks),
+  "Footer must preserve the five linked live Sectors items",
+);
+for (const [href, label] of [
+  ["/terms/", "Terms and Conditions"],
+  ["/privacy/", "Privacy Policy"],
+  ["/cookies/", "Cookies Policy"],
+]) {
+  assert(footer.includes(`<a href="${href}">${label}</a>`), `Footer is missing linked ${label}`);
+}
+assert(
+  footer.includes('<a href="mailto:ns@stevensventures.com">ns@stevensventures.com</a>'),
+  "Footer must keep the working source email link",
+);
+assert(!footer.includes("Business Lines"), "Footer must not regress to the old Business Lines menu");
+
+const sitemap = readFileSync(resolve(root, "sitemap.xml"), "utf8");
+const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+assert(sitemapLocations.length === 18, `Sitemap must contain 18 URLs, found ${sitemapLocations.length}`);
+for (const route of routes) {
+  assert(
+    sitemapLocations.includes(`https://www.stevensventures.com/${route}/`),
+    `Sitemap is missing ${route}`,
+  );
+}
+
+console.log(
+  `Verified ${routes.length} source-backed layout pages, both linked Sectors menu variants, the linked live footer, and the 18-URL sitemap.`,
+);
