@@ -85,7 +85,7 @@ for (const [href, label] of [
   assert(footer.includes(`<a href="${href}">${label}</a>`), `Footer is missing linked ${label}`);
 }
 assert(
-  footer.includes('<a href="mailto:ns@stevensventures.com">ns@stevensventures.com</a>'),
+  footer.includes('<a data-contact-email="ns@stevensventures.com" href="mailto:ns@stevensventures.com">ns@stevensventures.com</a>'),
   "Footer must keep the working source email link",
 );
 assert(!footer.includes("Business Lines"), "Footer must not regress to the old Business Lines menu");
