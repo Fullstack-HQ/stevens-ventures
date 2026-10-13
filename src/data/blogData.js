@@ -137,7 +137,7 @@ export const blogData = {
       fullContent: 
             `
             <p>
-              <em>By Nathaniel Stevens, Founder of Punchey, Managing Director at Stevens Ventures, and Founder and Former CEO of Yodle</em>
+              <em>By Nathaniel Stevens, Founder of Punchey, Partner at Stevens Ventures, and Founder and Former CEO of Yodle</em>
             </p>
 
             <p>
