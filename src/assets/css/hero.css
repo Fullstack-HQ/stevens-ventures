@@ -82,6 +82,12 @@ h1 .accent {
   line-height: 32px;
 }
 
+.hero .text-button .text a {
+  color: inherit;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
 .hero .text-button .button-group {
   display: flex;
   flex-direction: row;
