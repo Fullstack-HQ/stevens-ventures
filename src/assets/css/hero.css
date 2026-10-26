@@ -88,6 +88,10 @@ h1 .accent {
   white-space: nowrap;
 }
 
+.hero .text-button .text .byline {
+  font-size: 0.875em;
+}
+
 .hero .text-button .button-group {
   display: flex;
   flex-direction: row;
