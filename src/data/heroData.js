@@ -6,7 +6,7 @@ export const heroSections = {
     bgImage: '/images/hero-section.webp',
     headingLine1: 'Investing in Tomorrow.',
     headingAccent: 'Today.',
-    text: 'Our investments focus on innovative models in the consumer, retail, technology and business services industries.',
+    text: 'Our investments focus on innovative models in the consumer, retail, technology and business services industries.<br>Founded by <a href="https://nathanielstevens.com/">Nathaniel Stevens</a><br>CEO, Stevens Auto Group · Partner, Stevens Ventures',
     buttons: [
       { label: 'Apply', href: '/contact-us/', style: 'gray', icon: '<img src="/images/curve-arrow.svg" alt="Curve arrow">' },
       { label: 'Invest', href: '/contact-us/', style: 'accent', icon: '<img src="/images/daf.svg" alt="Arrow pointing right">' },
